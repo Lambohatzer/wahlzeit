@@ -123,6 +123,11 @@ public class Photo extends DataObject {
 	protected String ending = "jpg";
 	
 	/**
+	 * 
+	 */
+	public Location location;
+	
+	/**
 	 *
 	 */
 	//TODO: change it to a single long
@@ -147,7 +152,7 @@ public class Photo extends DataObject {
 
 		incWriteCount();
 	}
-
+	
 	/**
 	 * @methodtype get
 	 */
