@@ -19,45 +19,47 @@
  */
 package org.wahlzeit.model;
 
-/**
- *
- */
-public class Location {
-	
-	public Coordinate coordinate;	
-	
+public class NullCoordinate extends Coordinate {
+
 	/**
-	 * @methodtype constructor
+	 * @methodtype convenience
 	 */
-	public Location(Coordinate coordinate) {
-		if(coordinate == null) {
-			this.coordinate = Coordinate.NULL_COORDINATE;
-		} else {
-			this.coordinate = coordinate;
-		}
+	public NullCoordinate() {
+		this(Double.NaN, Double.NaN, Double.NaN);
+	}
+	
+	public NullCoordinate(double x, double y, double z) {
+		super(Double.NaN, Double.NaN, Double.NaN);
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if(o == null) {
-			return false;
-		} else if(o == this) {
-			return true;
-		} else if(o instanceof Location) {
-			return isEqual((Location) o);
-		} else {
-			return false;
-		}
+		return false;
 	}
 	
-	public boolean isEqual(Location other) {
-		if(other == null) {
-			return false;
-		} else if(other == this) {
-			return true;
-		} else {
-			return this.coordinate.isEqual(other.coordinate);
-		}
+	@Override
+	public boolean isEqual(Coordinate other) {
+		return false;
 	}
-		
+	
+	@Override
+	public double getDistance(Coordinate from) {
+		return Double.NaN;
+	}
+	
+	@Override
+	public void setX(double x) {
+		// do nothing, this.x is still Double.NaN
+	}
+	
+	@Override
+	public void setY(double y) {
+		// do nothing, this.x is still Double.NaN
+	}
+	
+	@Override
+	public void setZ(double z) {
+		// do nothing, this.x is still Double.NaN
+	}
+
 }
