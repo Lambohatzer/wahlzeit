@@ -7,6 +7,9 @@ import org.wahlzeit.model.persistence.ModelPersistenceTestSuite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	ModelPersistenceTestSuite.class,
+	AbimottoPhotoFactoryTest.class,
+	AbimottoPhotoManagerTest.class,
+	AbimottoPhotoTest.class,
 	AccessRightsTest.class,
 	CoordinateTest.class,
 	FlagReasonTest.class,
