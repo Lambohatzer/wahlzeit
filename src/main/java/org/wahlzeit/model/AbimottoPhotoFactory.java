@@ -103,6 +103,14 @@ public class AbimottoPhotoFactory extends PhotoFactory {
 	
 	/**
 	 * @methodtype factory
+	 * @return a new AbimottoPhoto.
+	 */
+	public AbimottoPhoto createAbimottoPhoto(AbimottoTheme theme) {
+		return new AbimottoPhoto(theme);
+	}
+	
+	/**
+	 * @methodtype factory
 	 * @return a new AbimottoPhoto @param id as its id.
 	 */
 	public AbimottoPhoto createAbimottoPhoto(PhotoId id) {
@@ -110,14 +118,12 @@ public class AbimottoPhotoFactory extends PhotoFactory {
 	}
 	
 	/**
-	 * @methodtype getter
+	 * @methodtype factory
+	 * @return a new AbimottoPhoto.
 	 */
-	@Override
-	public Photo loadPhoto(PhotoId id) {
-		// TODO
-		return null;
+	public AbimottoPhoto createAbimottoPhoto(PhotoId id, AbimottoTheme theme) {
+		return new AbimottoPhoto(id, theme);
 	}
-	
-	
+		
 
 }

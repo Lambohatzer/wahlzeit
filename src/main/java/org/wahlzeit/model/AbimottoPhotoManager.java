@@ -21,9 +21,11 @@ package org.wahlzeit.model;
 
 import java.util.logging.Logger;
 
+import org.wahlzeit.services.LogBuilder;
+
 public class AbimottoPhotoManager extends PhotoManager {
 
-	protected static final AbimottoPhotoManager instance = new AbimottoPhotoManager();
+	protected static AbimottoPhotoManager instance;
 	
 	private static final Logger log = Logger.getLogger(AbimottoPhotoManager.class.getName());
 	
@@ -35,43 +37,26 @@ public class AbimottoPhotoManager extends PhotoManager {
 	 * @methodtype getter
 	 */
 	public static AbimottoPhotoManager getInstance() {
+		if(instance == null) {
+			log.config(LogBuilder.createSystemMessage().addAction("setting AbimottoPhotoManager").toString());
+			setInstance(new AbimottoPhotoManager());
+		}
 		return instance;
 	}
 	
 	/**
-	 * @methodtype getter
-	 * Overriding getPhoto until a better solution is found
-	 * also doGetPhotoFromId does nothing yet, hopefully the feedback
-	 * will give me some hints on what to do exactly
+	 * @methodtype setter
 	 */
-	@Override
-	public Photo getPhoto(PhotoId id) {
-		return instance.getPhotoFromId(id);
-	}
-	
-	/**
-	 * @methodtype getter
-	 */
-	@Override
-	public Photo getPhotoFromId(PhotoId id) {
-		if (id == null) {
-			return null;
+	protected static synchronized void setInstance(AbimottoPhotoManager apm) {
+		if(instance != null) {
+			throw new IllegalStateException("attempt to initialize AbimottoPhotoManager twice.");
 		}
-		
-		Photo result = doGetPhotoFromId(id);
-		
-		if(result == null) {
-			result = AbimottoPhotoFactory.getInstance().loadPhoto(id);
-			if(result != null) {
-				doAddPhoto(result);
-			}
-		}
-		
-		return result;
+		instance = apm;
 	}
-	
+			
 	/**
 	 * @methodtype command
+	 * @methodproperty primitive
 	 */
 	protected void doAddAbimottoPhoto(AbimottoPhoto myAbimottoPhoto) {
 		super.doAddPhoto(myAbimottoPhoto);
@@ -79,6 +64,7 @@ public class AbimottoPhotoManager extends PhotoManager {
 	
 	/**
 	 * @methodtype command
+	 * @methodproperty primitive
 	 */
 	@Override
 	protected void doAddPhoto(Photo myPhoto) {
@@ -87,4 +73,11 @@ public class AbimottoPhotoManager extends PhotoManager {
 		}
 		doAddAbimottoPhoto((AbimottoPhoto) myPhoto);
 	}	
+	
+	/**
+	 * @methodtype getter
+	 */
+	public AbimottoPhoto getAbimottoPhoto(PhotoId id) {
+		return (AbimottoPhoto) super.getPhoto(id);
+	}
 }

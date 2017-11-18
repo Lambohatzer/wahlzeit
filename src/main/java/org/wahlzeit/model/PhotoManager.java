@@ -46,9 +46,9 @@ import java.util.logging.Logger;
 public class PhotoManager extends ObjectManager {
 
 	/**
-	 *
+	 * "final" removed to allow AbimottoPhotoManager to hide it
 	 */
-	protected static final PhotoManager instance = new PhotoManager();
+	protected static PhotoManager instance = new PhotoManager();
 
 	private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
 
@@ -70,7 +70,7 @@ public class PhotoManager extends ObjectManager {
 	}
 
 	/**
-	 * removed final until a better solution is found
+	 * "final" removed to allow AbimottoPhotoManager to hide it
 	 */
 	public static PhotoManager getInstance() {
 		return instance;
@@ -91,9 +91,9 @@ public class PhotoManager extends ObjectManager {
 	}
 
 	/**
-	 * removed final until a better solution is found
+	 *
 	 */
-	public Photo getPhoto(PhotoId id) {
+	public final Photo getPhoto(PhotoId id) {
 		return instance.getPhotoFromId(id);
 	}
 

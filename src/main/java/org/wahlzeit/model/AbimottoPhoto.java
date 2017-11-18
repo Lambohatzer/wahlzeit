@@ -19,28 +19,55 @@
  */
 package org.wahlzeit.model;
 
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
 public class AbimottoPhoto extends Photo {
 
-	public AbimottoPhoto() {
-		super();
-	}
+	private AbimottoTheme theme;
 	
-	public AbimottoPhoto(PhotoId id) {
+	/**
+	 * @methodtype constructor
+	 */
+	public AbimottoPhoto(PhotoId id, AbimottoTheme theme) {
 		super(id);
+		this.theme = theme;
 	}
 	
 	/**
-	 * @methodtype command
+	 * @methodtype constructor
 	 */
-	public void save() {
-		AbimottoPhotoManager.getInstance().savePhoto(this);
+	public AbimottoPhoto(PhotoId id) {
+		this(id, AbimottoTheme.DEFAULT_THEME);
 	}
 	
 	/**
-	 * @methodtype command
+	 * @methodtype constructor
 	 */
-	public AbimottoPhoto load() {
-		return (AbimottoPhoto) AbimottoPhotoManager.getInstance().getPhoto(id);
+	public AbimottoPhoto(AbimottoTheme theme) {
+		super();
+		this.theme = theme;
 	}
 
+	/**
+	 * @methodtype constructor
+	 */
+	public AbimottoPhoto() {
+		this(AbimottoTheme.DEFAULT_THEME);
+	}
+	
+	/**
+	 * @methodtype setter
+	 */
+	public void setAbimottoTheme(AbimottoTheme theme) {
+		this.theme = theme;
+	}
+	
+	/**
+	 * @methodtype getter
+	 */
+	public AbimottoTheme getAbimottoTheme() {
+		return theme;
+	}
+	
 }
