@@ -19,108 +19,38 @@
  */
 package org.wahlzeit.model;
 
-/**
- * A Coordinate is a set of three double Values that describe a point in a
- * 3D Cartesian coordinate system.
- */
-public class Coordinate {
+public interface Coordinate {
 	
-	public static final Coordinate NULL_COORDINATE = new NullCoordinate();
-	private static final double EPSILON = 0.0000001;
-	
-	private double x, y, z;
+	double EPSILON = 0.000001;
+	Coordinate NULL_COORDINATE = new NullCoordinate();
 	
 	/**
-	 * @methodtype constructor
+	 * @methodtype conversion
 	 */
-	public Coordinate(double x, double y, double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-			
+	public CartesianCoordinate asCartesianCoordinate();
+
 	/**
-	 * Computes distance between from and this.
+	 * @methodtype getter
 	 */
-	public double getDistance(Coordinate from) {
-		if(from == null) {
-			throw new IllegalArgumentException();
-		}
-		double deltaX = this.x - from.x;
-		double deltaY = this.y - from.y;
-		double deltaZ = this.z - from.z;
-		return Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if(o == null) {
-			return false;
-		} else if(o == this) {
-			return true;
-		} else if(o instanceof Coordinate) {
-			return isEqual((Coordinate) o);
-		} else {
-			return false;
-		}
-	}
+	public double getCartesianDistance(Coordinate c);
 	
 	/**
-	 * Checks if all three Coordinate-Values of this and other are the same.
-	 * Returns true if they are the same, false otherwise.
+	 * @methodtype conversion
 	 */
-	public boolean isEqual(Coordinate other) {
-		if(other == null) {
-			return false;
-		} else if(other == this) {
-			return true;
-		} else {
-			return 	(Math.abs(this.x - other.x) < EPSILON) && 
-					(Math.abs(this.y - other.y) < EPSILON) && 
-					(Math.abs(this.z - other.z) < EPSILON);
-		}
-	}
+	public SphericCoordinate asSpericCoordinate();
 	
 	/**
-	 * @methodtype get
+	 * @methodtype getter
 	 */
-	public double getX() {
-		return x;
-	}
+	public double getSphericDistance(Coordinate c);
 	
 	/**
-	 * @methodtype get
+	 * @methodtype getter
 	 */
-	public double getY() {
-		return y;
-	}
-	
+	public double getDistance(Coordinate c);
+
 	/**
-	 * @methodtype get
+	 * @methodtype boolean-query
 	 */
-	public double getZ() {
-		return z;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public void setX(double x) {
-		this.x = x;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public void setY(double y) {
-		this.y = y;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public void setZ(double z) {
-		this.z = z;
-	}
-	
+	public boolean isEqual(Coordinate c);
 }

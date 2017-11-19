@@ -43,7 +43,7 @@ public class AbimottoPhotoManagerTest {
 	//TODO: enter some tests, once the task is better understood
 	@Test
 	public void testSomething() {
-		assertTrue(AbimottoPhotoManager.instance == AbimottoPhotoManager.getInstance());
+		assertTrue(AbimottoPhotoManager.getInstance() == AbimottoPhotoManager.instance);
 	}
 	
 }

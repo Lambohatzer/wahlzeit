@@ -29,7 +29,7 @@ public class LocationTest {
 
 	@Test
 	public void testGetCoordinate() {
-		Coordinate c = new Coordinate(5, 9, 73);
+		CartesianCoordinate c = new CartesianCoordinate(5, 9, 73);
 		Location l = new Location(c);
 		
 		assertSame(c, l.coordinate);
@@ -37,8 +37,8 @@ public class LocationTest {
 	
 	@Test
 	public void testEquals() {
-		Coordinate c1 = new Coordinate(5, 9, 73);
-		Coordinate c2 = new Coordinate(5, 9, 73);
+		CartesianCoordinate c1 = new CartesianCoordinate(5, 9, 73);
+		CartesianCoordinate c2 = new CartesianCoordinate(5, 9, 73);
 		
 		Location l1 = new Location(c1);
 		Location l2 = new Location(c2);
@@ -49,8 +49,8 @@ public class LocationTest {
 	
 	@Test
 	public void testIsEqual() {
-		Coordinate c1 = new Coordinate(5, 9, 73);
-		Coordinate c2 = new Coordinate(5, 9, 73);
+		CartesianCoordinate c1 = new CartesianCoordinate(5, 9, 73);
+		CartesianCoordinate c2 = new CartesianCoordinate(5, 9, 73);
 		
 		Location l1 = new Location(c1);
 		Location l2 = new Location(c2);

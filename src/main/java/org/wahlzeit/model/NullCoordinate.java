@@ -19,47 +19,57 @@
  */
 package org.wahlzeit.model;
 
-public class NullCoordinate extends Coordinate {
+public class NullCoordinate implements Coordinate {
 
 	/**
-	 * @methodtype convenience
+	 * @methodtype constructor
 	 */
-	public NullCoordinate() {
-		this(Double.NaN, Double.NaN, Double.NaN);
-	}
-	
-	public NullCoordinate(double x, double y, double z) {
-		super(Double.NaN, Double.NaN, Double.NaN);
-	}
-	
+	public NullCoordinate() {}
+		
 	@Override
 	public boolean equals(Object o) {
 		return false;
 	}
 	
-	@Override
-	public boolean isEqual(Coordinate other) {
-		return false;
+	/**
+	 * @methodtype conversion
+	 */
+	public CartesianCoordinate asCartesianCoordinate() {
+		return new CartesianCoordinate(Double.NaN, Double.NaN, Double.NaN);
 	}
-	
-	@Override
-	public double getDistance(Coordinate from) {
+
+	/**
+	 * @methodtype getter
+	 */
+	public double getCartesianDistance(Coordinate c) {
 		return Double.NaN;
 	}
 	
-	@Override
-	public void setX(double x) {
-		// do nothing, this.x is still Double.NaN
+	/**
+	 * @methodtype conversion
+	 */
+	public SphericCoordinate asSpericCoordinate() {
+		return new SphericCoordinate(Double.NaN, Double.NaN, Double.NaN);
 	}
 	
-	@Override
-	public void setY(double y) {
-		// do nothing, this.x is still Double.NaN
+	/**
+	 * @methodtype getter
+	 */
+	public double getSphericDistance(Coordinate c) {
+		return Double.NaN;
 	}
 	
-	@Override
-	public void setZ(double z) {
-		// do nothing, this.x is still Double.NaN
+	/**
+	 * @methodtype getter
+	 */
+	public double getDistance(Coordinate c) {
+		return Double.NaN;
 	}
 
+	/**
+	 * @methodtype boolean-query
+	 */
+	public boolean isEqual(Coordinate c) {
+		return false;
+	}
 }

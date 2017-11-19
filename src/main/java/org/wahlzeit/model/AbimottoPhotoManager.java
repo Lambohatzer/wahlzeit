@@ -32,7 +32,7 @@ public class AbimottoPhotoManager extends PhotoManager {
 	public AbimottoPhotoManager() {
 		photoTagCollector = AbimottoPhotoFactory.getInstance().createPhotoTagCollector();
 	}
-	
+		
 	/**
 	 * @methodtype getter
 	 */
