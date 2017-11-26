@@ -20,10 +20,10 @@
 package org.wahlzeit.model;
 
 /**
- * A Coordinate is a set of three double Values that describe a point in a
- * 3D Cartesian coordinate system.
+ * A CartesianCoordinate is a set of three double Values (x, y, z), 
+ * that describe a point in a 3D Cartesian coordinate system.
  */
-public class CartesianCoordinate implements Coordinate{
+public class CartesianCoordinate extends AbstractCoordinate {
 		
 	private double x, y, z;
 	
@@ -35,20 +35,16 @@ public class CartesianCoordinate implements Coordinate{
 		this.y = y;
 		this.z = z;
 	}
-				
-	@Override
-	public boolean equals(Object o) {
-		if(o == null) {
-			return false;
-		} else if(o == this) {
-			return true;
-		} else if(o instanceof CartesianCoordinate) {
-			return isEqual((CartesianCoordinate) o);
-		} else {
-			return false;
-		}
-	}
 	
+	/**
+	 * @methodtype cloning
+	 */
+	public CartesianCoordinate(CartesianCoordinate toClone) {
+		this.x = toClone.x;
+		this.y = toClone.y;
+		this.z = toClone.z;
+	}
+			
 	/**
 	 * @methodtype getter
 	 */
@@ -95,14 +91,20 @@ public class CartesianCoordinate implements Coordinate{
 	 * @methodtype conversion
 	 */
 	public CartesianCoordinate asCartesianCoordinate() {
-		return this;
+		return new CartesianCoordinate(this);
 	}
 
 	/**
 	 * @methodtype getter
 	 */
 	public double getCartesianDistance(Coordinate c) {
-		return this.getDistance(c);
+		if(c == null) {
+			throw new IllegalArgumentException();
+		}
+		double deltaX = this.x - c.asCartesianCoordinate().x;
+		double deltaY = this.y - c.asCartesianCoordinate().y;
+		double deltaZ = this.z - c.asCartesianCoordinate().z;
+		return Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
 	}
 	
 	/**
@@ -133,38 +135,9 @@ public class CartesianCoordinate implements Coordinate{
 	 * @methodtype getter
 	 */
 	public double getSphericDistance(Coordinate c) {
-		return this.asSpericCoordinate().getDistance(c);
+		return this.asSpericCoordinate().getSphericDistance(c);
 	}
-	
-	/**
-	 * @methodtype getter
-	 * Computes distance between from and this.
-	 */
-	public double getDistance(Coordinate c) {
-		if(c == null) {
-			throw new IllegalArgumentException();
-		}
-		double deltaX = this.x - c.asCartesianCoordinate().x;
-		double deltaY = this.y - c.asCartesianCoordinate().y;
-		double deltaZ = this.z - c.asCartesianCoordinate().z;
-		return Math.sqrt(deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ);
-	}
-
-	/**
-	 * @methodtype boolean-query
-	 * Checks if all three Coordinate-Values of this and other are the same.
-	 * Returns true if they are the same, false otherwise.
-	 */
-	public boolean isEqual(Coordinate c) {
-		if(c == null) {
-			return false;
-		} else if(c == this) {
-			return true;
-		} else {
-			return 	this.getDistance(c) < EPSILON;
-		}
-	}
-	
+		
 	@Override
 	public String toString() {
 		return "[x="+x+", y="+y+", z="+z+"]";

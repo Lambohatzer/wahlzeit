@@ -19,15 +19,31 @@
  */
 package org.wahlzeit.model;
 
-public class SphericCoordinate implements Coordinate {
+/**
+ * A SphericCoordinate is a set of three double Values (latitude, longitude, radius), 
+ * that describe a point in a 3D Spheric coordinate system.
+ */
+public class SphericCoordinate extends AbstractCoordinate {
 
 	private double latitude, longitude, radius;
 	
+	/**
+	 * @methodtype constructor
+	 */
 	public SphericCoordinate(double latitude, double longitude, double radius) {
 		assertLatitudeAndLongitude(latitude, longitude);
 		this.latitude = latitude;			//0 <= latitude <= PI
 		this.longitude = longitude;			//0 <= longitude <= 2PI
 		this.radius = radius;
+	}
+	
+	/**
+	 * @methodtype cloning
+	 */
+	public SphericCoordinate(SphericCoordinate toClone) {
+		this.latitude = toClone.latitude;
+		this.longitude = toClone.longitude;	
+		this.radius = toClone.radius;
 	}
 	
 	/**
@@ -84,20 +100,7 @@ public class SphericCoordinate implements Coordinate {
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if(o == null) {
-			return false;
-		} else if(o == this) {
-			return true;
-		} else if(o instanceof SphericCoordinate) {
-			return isEqual((SphericCoordinate) o);
-		} else {
-			return false;
-		}
-	}
-	
+		
 	/**
 	 * @methodtype conversion
 	 */
@@ -112,27 +115,20 @@ public class SphericCoordinate implements Coordinate {
 	 * @methodtype getter
 	 */
 	public double getCartesianDistance(Coordinate c) {
-		return this.asCartesianCoordinate().getDistance(c);
+		return this.asCartesianCoordinate().getCartesianDistance(c);
 	}
 	
 	/**
 	 * @methodtype conversion, well, kind of
 	 */
 	public SphericCoordinate asSpericCoordinate() {
-		return this;
+		return new SphericCoordinate(this);
 	}
 	
 	/**
 	 * @methodtype getter
 	 */
 	public double getSphericDistance(Coordinate c) {
-		return this.getDistance(c);
-	}
-	
-	/**
-	 * @methodtype getter
-	 */
-	public double getDistance(Coordinate c) {
 		if(c == null) {
 			throw new IllegalArgumentException();
 		}
@@ -145,21 +141,8 @@ public class SphericCoordinate implements Coordinate {
 				)
 		);
 		return ret; 
-	};
-
-	/**
-	 * @methodtype boolean-query
-	 */
-	public boolean isEqual(Coordinate c) {
-		if(c == null) {
-			return false;
-		} else if(c == this) {
-			return true;
-		} else {
-			return this.getDistance(c) < EPSILON;
-		}
-	};
-	
+	}
+		
 	@Override
 	public String toString() {
 		return "[latitude="+latitude+", longitude="+longitude+", radius="+radius+"]";
