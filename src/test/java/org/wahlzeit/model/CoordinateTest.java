@@ -80,6 +80,11 @@ public class CoordinateTest {
 		assertEquals(31.54362059117501, a.getDistance(j), Coordinate.EPSILON);
 	}
 	
+	@Test(expected=AssertionError.class)
+	public void testCartesianCloneWithNullArgument() {
+		CartesianCoordinate a = new CartesianCoordinate(null);
+	}
+	
 	// ------------------------------------------------------------------------
 	// ---------------------- SphericCoordinate tests -----------------------
 	// ------------------------------------------------------------------------
@@ -125,12 +130,46 @@ public class CoordinateTest {
 		assertEquals(6., n.getDistance(c), Coordinate.EPSILON);
 		assertEquals(6., n.getDistance(d), Coordinate.EPSILON);
 		assertEquals(6., n.getDistance(e), Coordinate.EPSILON);
-	}	
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericCloneWithNullArgument() {
+		SphericCoordinate a  = new SphericCoordinate(null);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericSetLatitudeWithBigIllegalArgument() {
+		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
+		a.setLatitude(Math.PI+0.1);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericSetLatitudeWithSmallIllegalArgument() {
+		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
+		a.setLatitude(-0.1);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericSetLongitudeWithBigIllegalArgument() {
+		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
+		a.setLongitude(Math.PI * 2.0 + 0.1);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericSetLongitudeWithSmallIllegalArgument() {
+		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
+		a.setLongitude(-0.1);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void testSphericSetRadiusWithIllegalArgument() {
+		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
+		a.setRadius(-0.1);
+	}
 	
 	// ------------------------------------------------------------------------
 	// ---------------------------- Mixed test --------------------------------
-	// ------------------------------------------------------------------------
-	
+	// ------------------------------------------------------------------------	
 	@Test
 	public void testCartesianDistanceMixed() {
 		CartesianCoordinate cc1 = new CartesianCoordinate(0.,0.,0.);

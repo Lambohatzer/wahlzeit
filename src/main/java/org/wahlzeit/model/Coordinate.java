@@ -53,4 +53,5 @@ public interface Coordinate {
 	 * @methodtype boolean-query
 	 */
 	public boolean isEqual(Coordinate c);
+	
 }

@@ -23,6 +23,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 
 	@Override
 	public boolean equals(Object o) {
+		assertClassInvariants();
+		
 		if(o == null) {
 			return false;
 		} else if(o == this) {
@@ -40,6 +42,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * Returns true if they are the same, false otherwise.
 	 */
 	public boolean isEqual(Coordinate c) {
+		assertClassInvariants();
+		
 		if(c == null) {
 			return false;
 		} else if(c == this) {
@@ -53,7 +57,23 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * returns the Cartesian distance as default distance
 	 */
 	public double getDistance(Coordinate c) {
+		assertClassInvariants();
+		
+		assertArgumentIsNotNull(c);
+		
 		return this.asCartesianCoordinate().getCartesianDistance(c);
+	}
+	
+	/**
+	 * @methodtype assertion
+	 */
+	protected abstract void assertClassInvariants();
+
+	/**
+	 * @methodtype assertion
+	 */
+	protected void assertArgumentIsNotNull(Object o) {
+		assert o != null : "Argument must not be null!";
 	}
 	
 }

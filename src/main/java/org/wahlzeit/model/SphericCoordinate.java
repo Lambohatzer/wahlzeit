@@ -30,39 +30,41 @@ public class SphericCoordinate extends AbstractCoordinate {
 	/**
 	 * @methodtype constructor
 	 */
-	public SphericCoordinate(double latitude, double longitude, double radius) {
-		assertLatitudeAndLongitude(latitude, longitude);
-		this.latitude = latitude;			//0 <= latitude <= PI
-		this.longitude = longitude;			//0 <= longitude <= 2PI
+	public SphericCoordinate(double latitude, double longitude, double radius) {	
+		assertValidLatitude(latitude);
+		assertValidLongitude(longitude);
+		assertValidRadius(radius);
+		
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.radius = radius;
+		
+		assertClassInvariants();
 	}
 	
 	/**
 	 * @methodtype cloning
 	 */
 	public SphericCoordinate(SphericCoordinate toClone) {
+		assertArgumentIsNotNull(toClone);
+		
+		assertValidLatitude(toClone.latitude);
+		assertValidLongitude(toClone.longitude);
+		assertValidRadius(toClone.radius);
+		
 		this.latitude = toClone.latitude;
 		this.longitude = toClone.longitude;	
 		this.radius = toClone.radius;
-	}
-	
-	/**
-	 * @methodtype assert
-	 */
-	private void assertLatitudeAndLongitude(double latitude, double longitude) {
-		if(latitude > Math.PI || latitude < 0) {
-			throw new IllegalArgumentException();
-		}
-		if(longitude > Math.PI*2. || longitude < 0) {
-			throw new IllegalArgumentException();
-		}
-		return;
+		
+		assertClassInvariants();
 	}
 	
 	/**
 	 * @methodtype getter
 	 */
 	public double getLatitude() {
+		assertClassInvariants();
+		
 		return latitude;
 	}
 	
@@ -70,6 +72,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype getter
 	 */
 	public double getLongitude() {
+		assertClassInvariants();
+		
 		return longitude;
 	}
 
@@ -77,13 +81,19 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype getter
 	 */
 	public double getRadius() {
+		assertClassInvariants();
+		
 		return radius;
 	}
 
 	/**
 	 * @methodtype setter
 	 */
-	public void setLantitude(double latitude) {
+	public void setLatitude(double latitude) {
+		assertClassInvariants();
+
+		assertValidLatitude(latitude);
+		
 		this.latitude = latitude;
 	}
 
@@ -91,6 +101,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype setter
 	 */
 	public void setLongitude(double longitude) {
+		assertClassInvariants();
+		
+		assertValidLongitude(longitude);
+		
 		this.longitude = longitude;
 	}
 
@@ -98,6 +112,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype setter
 	 */
 	public void setRadius(double radius) {
+		assertClassInvariants();
+		
+		assertValidRadius(radius);
+		
 		this.radius = radius;
 	}
 		
@@ -105,9 +123,13 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype conversion
 	 */
 	public CartesianCoordinate asCartesianCoordinate() {
+		assertClassInvariants();
+		
 		double x = radius*Math.sin(latitude)*Math.cos(longitude);
 		double y = radius*Math.sin(latitude)*Math.sin(longitude);
 		double z = radius*Math.cos(latitude);
+
+		assertClassInvariants();
 		return new CartesianCoordinate(x,y,z);
 	}
 
@@ -115,6 +137,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype getter
 	 */
 	public double getCartesianDistance(Coordinate c) {
+		assertClassInvariants();
+		
+		assertArgumentIsNotNull(c);
+		
 		return this.asCartesianCoordinate().getCartesianDistance(c);
 	}
 	
@@ -122,6 +148,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype conversion, well, kind of
 	 */
 	public SphericCoordinate asSpericCoordinate() {
+		assertClassInvariants();
 		return new SphericCoordinate(this);
 	}
 	
@@ -129,9 +156,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @methodtype getter
 	 */
 	public double getSphericDistance(Coordinate c) {
-		if(c == null) {
-			throw new IllegalArgumentException();
-		}
+		assertClassInvariants();
+		
+		assertArgumentIsNotNull(c);
+		
 		SphericCoordinate other = c.asSpericCoordinate();
 		double ret = Math.sqrt(
 				this.radius*this.radius + other.radius*other.radius -
@@ -140,6 +168,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 						Math.cos(this.latitude)*Math.cos(other.latitude)
 				)
 		);
+
+		assertClassInvariants();
 		return ret; 
 	}
 		
@@ -148,4 +178,35 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return "[latitude="+latitude+", longitude="+longitude+", radius="+radius+"]";
 	}
 
+	/**
+	 * @methodtype assertion
+	 */
+	@Override
+	protected void assertClassInvariants() {
+		assertValidLongitude(this.longitude);
+		assertValidLatitude(this.latitude);
+		assertValidRadius(this.radius);
+	}
+
+	/**
+	 * @methodtype assertion
+	 */
+	private void assertValidLongitude(double longitude) {
+		assert (longitude >= 0.0) && (longitude <= 2.0 * Math.PI) : "longitude must be in range [0, 2*PI]!";		
+	}
+
+	/**
+	 * @methodtype assertion
+	 */
+	private void assertValidLatitude(double latitude) {
+		assert (latitude >= 0.0) && (latitude <= Math.PI) : "latitude must be in range [0, PI]!";		
+	}
+
+	/**
+	 * @methodtype assertion
+	 */
+	private void assertValidRadius(double radius) {
+		assert radius >= 0.0 : "radius must be greater than 0!";
+	}
+	
 }
