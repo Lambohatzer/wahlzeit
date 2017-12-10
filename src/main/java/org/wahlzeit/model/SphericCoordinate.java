@@ -183,30 +183,40 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 */
 	@Override
 	protected void assertClassInvariants() {
-		assertValidLongitude(this.longitude);
-		assertValidLatitude(this.latitude);
-		assertValidRadius(this.radius);
+		try {
+			assertValidLongitude(this.longitude);
+			assertValidLatitude(this.latitude);
+			assertValidRadius(this.radius);
+		} catch(IllegalArgumentException e) {
+			throw new IllegalStateException();
+		}
 	}
 
 	/**
 	 * @methodtype assertion
 	 */
 	private void assertValidLongitude(double longitude) {
-		assert (longitude >= 0.0) && (longitude <= 2.0 * Math.PI) : "longitude must be in range [0, 2*PI]!";		
+		if((longitude < 0.0) || (longitude > 2.0 * Math.PI)) {
+			throw new IllegalArgumentException("longitude must be in range [0, 2*PI]!");		
+		}
 	}
 
 	/**
 	 * @methodtype assertion
 	 */
 	private void assertValidLatitude(double latitude) {
-		assert (latitude >= 0.0) && (latitude <= Math.PI) : "latitude must be in range [0, PI]!";		
+		if((latitude < 0.0) || (latitude > Math.PI)) {
+			throw new IllegalArgumentException("latitude must be in range [0, PI]!");		
+		}
 	}
 
 	/**
 	 * @methodtype assertion
 	 */
 	private void assertValidRadius(double radius) {
-		assert radius >= 0.0 : "radius must be greater than 0!";
+		if(radius < 0.0) {
+			throw new IllegalArgumentException("radius must be greater than 0!");
+		}
 	}
 	
 }

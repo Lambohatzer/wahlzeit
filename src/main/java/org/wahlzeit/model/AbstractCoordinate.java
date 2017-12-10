@@ -73,7 +73,18 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * @methodtype assertion
 	 */
 	protected void assertArgumentIsNotNull(Object o) {
-		assert o != null : "Argument must not be null!";
+		if(o == null) {
+			throw new IllegalArgumentException("Argument must not be null!");
+		}
+	}
+	
+	protected void assertIsValidDouble(double d) {
+		if(Double.isInfinite(d)) {
+			throw new IllegalArgumentException("Argument must not be infinite!");
+		}
+		if(Double.isNaN(d)) {
+			throw new IllegalArgumentException("Argument must not be NaN!");
+		}
 	}
 	
 }

@@ -31,6 +31,9 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype constructor
 	 */
 	public CartesianCoordinate(double x, double y, double z) {
+		assertIsValidDouble(x);
+		assertIsValidDouble(y);
+		assertIsValidDouble(z);
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -83,6 +86,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 */
 	public void setX(double x) {
 		assertClassInvariants();
+		assertIsValidDouble(x);
 		
 		this.x = x;
 	}
@@ -92,6 +96,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 */
 	public void setY(double y) {
 		assertClassInvariants();
+		assertIsValidDouble(y);
 		
 		this.y = y;
 	}
@@ -101,6 +106,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 */
 	public void setZ(double z) {
 		assertClassInvariants();
+		assertIsValidDouble(z);
 		
 		this.z = z;
 	}
@@ -176,7 +182,12 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	
 	@Override
 	protected void assertClassInvariants() {
-		// there are actually no things to check here, as every value is valid for x, y and z ...
-	}
-	
+		try {
+			assertIsValidDouble(x);
+			assertIsValidDouble(y);
+			assertIsValidDouble(z);
+		} catch(IllegalArgumentException e) {
+			throw new IllegalStateException();
+		}
+	}	
 }
