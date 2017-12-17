@@ -19,6 +19,8 @@
  */
 package org.wahlzeit.model;
 
+import java.util.ArrayList;
+
 /**
  * A CartesianCoordinate is a set of three double Values (x, y, z), 
  * that describe a point in a 3D Cartesian coordinate system.
@@ -26,30 +28,30 @@ package org.wahlzeit.model;
 public class CartesianCoordinate extends AbstractCoordinate {
 		
 	private double x, y, z;
+
+	protected static ArrayList<Coordinate> cartesianCoordinates = new ArrayList<>();
+	
+	public static CartesianCoordinate createCartesianCoordinate(double x, double y, double z) {
+		CartesianCoordinate coordinate = new CartesianCoordinate(x,y,z);
+		
+		if(cartesianCoordinates.contains(coordinate)) {
+			return (CartesianCoordinate) cartesianCoordinates.get(cartesianCoordinates.indexOf(coordinate));
+		} else {
+			cartesianCoordinates.add(coordinate);
+			return coordinate;
+		}
+	}
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
+	private CartesianCoordinate(double x, double y, double z) {
 		assertIsValidDouble(x);
 		assertIsValidDouble(y);
 		assertIsValidDouble(z);
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
-		assertClassInvariants();
-	}
-	
-	/**
-	 * @methodtype cloning
-	 */
-	public CartesianCoordinate(CartesianCoordinate toClone) {
-		assertArgumentIsNotNull(toClone);
-		
-		this.x = toClone.x;
-		this.y = toClone.y;
-		this.z = toClone.z;
 		
 		assertClassInvariants();
 	}
@@ -80,36 +82,6 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		
 		return z;
 	}
-	
-	/**
-	 * @methodtype setter
-	 */
-	public void setX(double x) {
-		assertClassInvariants();
-		assertIsValidDouble(x);
-		
-		this.x = x;
-	}
-	
-	/**
-	 * @methodtype setter
-	 */
-	public void setY(double y) {
-		assertClassInvariants();
-		assertIsValidDouble(y);
-		
-		this.y = y;
-	}
-	
-	/**
-	 * @methodtype setter
-	 */
-	public void setZ(double z) {
-		assertClassInvariants();
-		assertIsValidDouble(z);
-		
-		this.z = z;
-	}
 
 	/**
 	 * @methodtype conversion
@@ -117,7 +89,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	public CartesianCoordinate asCartesianCoordinate() {
 		assertClassInvariants();
 		
-		return new CartesianCoordinate(this);
+		return this;
 	}
 
 	/**
@@ -161,7 +133,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 		}
 		
 		assertClassInvariants();
-		return new SphericCoordinate(latitude, longitude, radius);
+		return SphericCoordinate.createSphericCoordinate(latitude, longitude, radius);
 	}
 	
 	/**
@@ -187,7 +159,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 			assertIsValidDouble(y);
 			assertIsValidDouble(z);
 		} catch(IllegalArgumentException e) {
-			throw new IllegalStateException();
+			throw new IllegalStateException("Illegal State in CartesianCoordinate: " + e.getMessage());
 		}
 	}	
 }

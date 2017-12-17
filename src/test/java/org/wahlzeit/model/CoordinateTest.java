@@ -32,12 +32,12 @@ public class CoordinateTest {
 	// ------------------------------------------------------------------------
 	@Test
 	public void testCartesianIsEqual() {
-		CartesianCoordinate a = new CartesianCoordinate(5.5, 7.9, 6.30157);
-		CartesianCoordinate b = new CartesianCoordinate(5.5, 7.9, 6.30157);
-		CartesianCoordinate c = new CartesianCoordinate(77., 99., 111.);
+		CartesianCoordinate a = CartesianCoordinate.createCartesianCoordinate(5.5, 7.9, 6.30157);
+		CartesianCoordinate b = CartesianCoordinate.createCartesianCoordinate(5.5, 7.9, 6.30157);
+		CartesianCoordinate c = CartesianCoordinate.createCartesianCoordinate(77., 99., 111.);
 		
-		CartesianCoordinate d = new CartesianCoordinate(0., 0.01, 0.);
-		CartesianCoordinate e = new CartesianCoordinate(0., 0.1*0.1, 0.);
+		CartesianCoordinate d = CartesianCoordinate.createCartesianCoordinate(0., 0.01, 0.);
+		CartesianCoordinate e = CartesianCoordinate.createCartesianCoordinate(0., 0.1*0.1, 0.);
 		
 		assertTrue(d.isEqual(e));
 		assertTrue(a.isEqual(b));
@@ -46,12 +46,12 @@ public class CoordinateTest {
 	
 	@Test
 	public void testCartesianEquals() {
-		CartesianCoordinate a = new CartesianCoordinate(5.5, 7.9, 6.30157);
-		CartesianCoordinate b = new CartesianCoordinate(5.5, 7.9, 6.30157);
-		CartesianCoordinate c = new CartesianCoordinate(77., 99., 111.);
+		CartesianCoordinate a = CartesianCoordinate.createCartesianCoordinate(5.5, 7.9, 6.30157);
+		CartesianCoordinate b = CartesianCoordinate.createCartesianCoordinate(5.5, 7.9, 6.30157);
+		CartesianCoordinate c = CartesianCoordinate.createCartesianCoordinate(77., 99., 111.);
 		
-		CartesianCoordinate d = new CartesianCoordinate(0., 0.01, 0.);
-		CartesianCoordinate e = new CartesianCoordinate(0., 0.1*0.1, 0.);
+		CartesianCoordinate d = CartesianCoordinate.createCartesianCoordinate(0., 0.01, 0.);
+		CartesianCoordinate e = CartesianCoordinate.createCartesianCoordinate(0., 0.1*0.1, 0.);
 		
 		assertTrue(d.equals(e));
 		assertTrue(a.equals(b));
@@ -60,15 +60,15 @@ public class CoordinateTest {
 	
 	@Test
 	public void testCartesianGetDistance() {
-		CartesianCoordinate a = new CartesianCoordinate(5., 7., 6.);
-		CartesianCoordinate b = new CartesianCoordinate(5., 7., 6.);
-		CartesianCoordinate c = new CartesianCoordinate(6., 7., 6.);
-		CartesianCoordinate d = new CartesianCoordinate(4., 7., 6.);
-		CartesianCoordinate e = new CartesianCoordinate(5., 8., 6.);
-		CartesianCoordinate f = new CartesianCoordinate(5., 6., 6.);
-		CartesianCoordinate g = new CartesianCoordinate(5., 7., 7.);
-		CartesianCoordinate h = new CartesianCoordinate(5., 7., 5.);
-		CartesianCoordinate j = new CartesianCoordinate(-20., -10., -3.);
+		CartesianCoordinate a = CartesianCoordinate.createCartesianCoordinate(5., 7., 6.);
+		CartesianCoordinate b = CartesianCoordinate.createCartesianCoordinate(5., 7., 6.);
+		CartesianCoordinate c = CartesianCoordinate.createCartesianCoordinate(6., 7., 6.);
+		CartesianCoordinate d = CartesianCoordinate.createCartesianCoordinate(4., 7., 6.);
+		CartesianCoordinate e = CartesianCoordinate.createCartesianCoordinate(5., 8., 6.);
+		CartesianCoordinate f = CartesianCoordinate.createCartesianCoordinate(5., 6., 6.);
+		CartesianCoordinate g = CartesianCoordinate.createCartesianCoordinate(5., 7., 7.);
+		CartesianCoordinate h = CartesianCoordinate.createCartesianCoordinate(5., 7., 5.);
+		CartesianCoordinate j = CartesianCoordinate.createCartesianCoordinate(-20., -10., -3.);
 		
 		assertEquals(0.0, a.getDistance(b), Coordinate.EPSILON);
 		assertEquals(1.0, a.getDistance(c), Coordinate.EPSILON);
@@ -80,9 +80,21 @@ public class CoordinateTest {
 		assertEquals(31.54362059117501, a.getDistance(j), Coordinate.EPSILON);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testCartesianCloneWithNullArgument() {
-		CartesianCoordinate a = new CartesianCoordinate(null);
+	@Test
+	public void testCartesianCoordinateCreation() {
+		int size = CartesianCoordinate.cartesianCoordinates.size();
+		
+		CartesianCoordinate.createCartesianCoordinate(-100, -100, -100);
+		assertTrue(CartesianCoordinate.cartesianCoordinates.size() == size+1);
+		
+		CartesianCoordinate.createCartesianCoordinate(-100, -100, -100);
+		assertTrue(CartesianCoordinate.cartesianCoordinates.size() == size+1);
+		
+		CartesianCoordinate.createCartesianCoordinate(-200, -200, -200);
+		assertTrue(CartesianCoordinate.cartesianCoordinates.size() == size+2);
+		
+		CartesianCoordinate.createCartesianCoordinate(-200, -200, -200);
+		assertTrue(CartesianCoordinate.cartesianCoordinates.size() == size+2);
 	}
 	
 	// ------------------------------------------------------------------------
@@ -90,12 +102,12 @@ public class CoordinateTest {
 	// ------------------------------------------------------------------------
 	@Test
 	public void testSphericIsEqual() {
-		SphericCoordinate a = new SphericCoordinate(Math.PI, 4.9, 6.30157);
-		SphericCoordinate b = new SphericCoordinate(Math.PI, 4.9, 6.30157);
-		SphericCoordinate c = new SphericCoordinate(2., 5., 111.);
+		SphericCoordinate a = SphericCoordinate.createSphericCoordinate(Math.PI, 4.9, 6.30157);
+		SphericCoordinate b = SphericCoordinate.createSphericCoordinate(Math.PI, 4.9, 6.30157);
+		SphericCoordinate c = SphericCoordinate.createSphericCoordinate(2., 5., 111.);
 		
-		SphericCoordinate d = new SphericCoordinate(0., 0.01, 0.);
-		SphericCoordinate e = new SphericCoordinate(0., 0.1*0.1, 0.);
+		SphericCoordinate d = SphericCoordinate.createSphericCoordinate(0., 0.01, 0.);
+		SphericCoordinate e = SphericCoordinate.createSphericCoordinate(0., 0.1*0.1, 0.);
 		
 		assertTrue(d.isEqual(e));
 		assertTrue(a.isEqual(b));
@@ -104,12 +116,12 @@ public class CoordinateTest {
 	
 	@Test
 	public void testSphericEquals() {
-		SphericCoordinate a = new SphericCoordinate(Math.PI, 4.9, 6.30157);
-		SphericCoordinate b = new SphericCoordinate(Math.PI, 4.9, 6.30157);
-		SphericCoordinate c = new SphericCoordinate(2., 5., 111.);
+		SphericCoordinate a = SphericCoordinate.createSphericCoordinate(Math.PI, 4.9, 6.30157);
+		SphericCoordinate b = SphericCoordinate.createSphericCoordinate(Math.PI, 4.9, 6.30157);
+		SphericCoordinate c = SphericCoordinate.createSphericCoordinate(2., 5., 111.);
 		
-		SphericCoordinate d = new SphericCoordinate(0., 0.01, 0.);
-		SphericCoordinate e = new SphericCoordinate(0., 0.1*0.1, 0.);
+		SphericCoordinate d = SphericCoordinate.createSphericCoordinate(0., 0.01, 0.);
+		SphericCoordinate e = SphericCoordinate.createSphericCoordinate(0., 0.1*0.1, 0.);
 		
 		assertTrue(d.equals(e));
 		assertTrue(a.equals(b));
@@ -118,12 +130,12 @@ public class CoordinateTest {
 	
 	@Test
 	public void testSphericGetDistance() {
-		SphericCoordinate n = new SphericCoordinate(0., 0., 0.);
-		SphericCoordinate a = new SphericCoordinate(0., 0., 6.);
-		SphericCoordinate b = new SphericCoordinate(0., 0., 6.);
-		SphericCoordinate c = new SphericCoordinate(Math.PI, 0., 6.);
-		SphericCoordinate d = new SphericCoordinate(0., Math.PI/2., 6.);
-		SphericCoordinate e = new SphericCoordinate(Math.PI/2., Math.PI/2., 6.);
+		SphericCoordinate n = SphericCoordinate.createSphericCoordinate(0., 0., 0.);
+		SphericCoordinate a = SphericCoordinate.createSphericCoordinate(0., 0., 6.);
+		SphericCoordinate b = SphericCoordinate.createSphericCoordinate(0., 0., 6.);
+		SphericCoordinate c = SphericCoordinate.createSphericCoordinate(Math.PI, 0., 6.);
+		SphericCoordinate d = SphericCoordinate.createSphericCoordinate(0., Math.PI/2., 6.);
+		SphericCoordinate e = SphericCoordinate.createSphericCoordinate(Math.PI/2., Math.PI/2., 6.);
 		
 		assertEquals(0., a.getDistance(b), Coordinate.EPSILON);
 		assertEquals(12., a.getDistance(c), Coordinate.EPSILON);
@@ -132,53 +144,36 @@ public class CoordinateTest {
 		assertEquals(6., n.getDistance(e), Coordinate.EPSILON);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericCloneWithNullArgument() {
-		SphericCoordinate a  = new SphericCoordinate(null);
+
+	@Test
+	public void testSphericCoordinateCreation() {
+		int size = SphericCoordinate.sphericCoordinates.size();
+		
+		SphericCoordinate.createSphericCoordinate(0, 0, 100);
+		assertTrue(SphericCoordinate.sphericCoordinates.size() == size+1);
+		
+		SphericCoordinate.createSphericCoordinate(0, 0, 100);
+		assertTrue(SphericCoordinate.sphericCoordinates.size() == size+1);
+		
+		SphericCoordinate.createSphericCoordinate(0, 0, 200);
+		assertTrue(SphericCoordinate.sphericCoordinates.size() == size+2);
+		
+		SphericCoordinate.createSphericCoordinate(0, 0, 200);
+		assertTrue(SphericCoordinate.sphericCoordinates.size() == size+2);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericSetLatitudeWithBigIllegalArgument() {
-		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
-		a.setLatitude(Math.PI+0.1);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericSetLatitudeWithSmallIllegalArgument() {
-		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
-		a.setLatitude(-0.1);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericSetLongitudeWithBigIllegalArgument() {
-		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
-		a.setLongitude(Math.PI * 2.0 + 0.1);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericSetLongitudeWithSmallIllegalArgument() {
-		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
-		a.setLongitude(-0.1);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSphericSetRadiusWithIllegalArgument() {
-		SphericCoordinate a  = new SphericCoordinate(0.,0.,0.);
-		a.setRadius(-0.1);
-	}
-	
+				
 	// ------------------------------------------------------------------------
 	// ---------------------------- Mixed test --------------------------------
 	// ------------------------------------------------------------------------	
 	@Test
 	public void testCartesianDistanceMixed() {
-		CartesianCoordinate cc1 = new CartesianCoordinate(0.,0.,0.);
-		CartesianCoordinate cc2 = new CartesianCoordinate(1.,0.,0.);
-		CartesianCoordinate cc3 = new CartesianCoordinate(0.,1.,0.);
+		CartesianCoordinate cc1 = CartesianCoordinate.createCartesianCoordinate(0.,0.,0.);
+		CartesianCoordinate cc2 = CartesianCoordinate.createCartesianCoordinate(1.,0.,0.);
+		CartesianCoordinate cc3 = CartesianCoordinate.createCartesianCoordinate(0.,1.,0.);
 		
-		SphericCoordinate sc1 = new SphericCoordinate(0.,0.,0.);
-		SphericCoordinate sc2 = new SphericCoordinate(Math.PI/2., 0., 1.);
-		SphericCoordinate sc3 = new SphericCoordinate(Math.PI/2., Math.PI/2., 1.);
+		SphericCoordinate sc1 = SphericCoordinate.createSphericCoordinate(0.,0.,0.);
+		SphericCoordinate sc2 = SphericCoordinate.createSphericCoordinate(Math.PI/2., 0., 1.);
+		SphericCoordinate sc3 = SphericCoordinate.createSphericCoordinate(Math.PI/2., Math.PI/2., 1.);
 		
 		assertTrue(cc1.getDistance(sc1) < Coordinate.EPSILON);
 		assertTrue(cc2.getDistance(sc2) < Coordinate.EPSILON);
@@ -188,13 +183,13 @@ public class CoordinateTest {
 	
 	@Test
 	public void testSphericDistanceMixed() {
-		CartesianCoordinate cc1 = new CartesianCoordinate(0.,0.,0.);
-		CartesianCoordinate cc2 = new CartesianCoordinate(1.,0.,0.);
-		CartesianCoordinate cc3 = new CartesianCoordinate(0.,1.,0.);
+		CartesianCoordinate cc1 = CartesianCoordinate.createCartesianCoordinate(0.,0.,0.);
+		CartesianCoordinate cc2 = CartesianCoordinate.createCartesianCoordinate(1.,0.,0.);
+		CartesianCoordinate cc3 = CartesianCoordinate.createCartesianCoordinate(0.,1.,0.);
 		
-		SphericCoordinate sc1 = new SphericCoordinate(0.,0.,0.);
-		SphericCoordinate sc2 = new SphericCoordinate(Math.PI/2., 0., 1.);
-		SphericCoordinate sc3 = new SphericCoordinate(Math.PI/2., Math.PI/2., 1.);
+		SphericCoordinate sc1 = SphericCoordinate.createSphericCoordinate(0.,0.,0.);
+		SphericCoordinate sc2 = SphericCoordinate.createSphericCoordinate(Math.PI/2., 0., 1.);
+		SphericCoordinate sc3 = SphericCoordinate.createSphericCoordinate(Math.PI/2., Math.PI/2., 1.);
 
 		assertTrue(sc1.getDistance(cc1)+"", sc1.getDistance(cc1) < Coordinate.EPSILON);
 		assertTrue(sc2.getDistance(cc2) < Coordinate.EPSILON);
@@ -203,13 +198,13 @@ public class CoordinateTest {
 	
 	@Test
 	public void testAsSphericCoordinate() {
-		CartesianCoordinate cc1 = new CartesianCoordinate(0.,0.,0.);
-		CartesianCoordinate cc2 = new CartesianCoordinate(1.,0.,0.);
-		CartesianCoordinate cc3 = new CartesianCoordinate(0.,1.,0.);
+		CartesianCoordinate cc1 = CartesianCoordinate.createCartesianCoordinate(0.,0.,0.);
+		CartesianCoordinate cc2 = CartesianCoordinate.createCartesianCoordinate(1.,0.,0.);
+		CartesianCoordinate cc3 = CartesianCoordinate.createCartesianCoordinate(0.,1.,0.);
 		
-		SphericCoordinate sc1 = new SphericCoordinate(0.,0.,0.);
-		SphericCoordinate sc2 = new SphericCoordinate(Math.PI/2., 0., 1.);
-		SphericCoordinate sc3 = new SphericCoordinate(Math.PI/2., Math.PI/2., 1.);
+		SphericCoordinate sc1 = SphericCoordinate.createSphericCoordinate(0.,0.,0.);
+		SphericCoordinate sc2 = SphericCoordinate.createSphericCoordinate(Math.PI/2., 0., 1.);
+		SphericCoordinate sc3 = SphericCoordinate.createSphericCoordinate(Math.PI/2., Math.PI/2., 1.);
 		
 		assertTrue(cc1.asSpericCoordinate().isEqual(sc1));
 		assertTrue(cc2.asSpericCoordinate().isEqual(sc2));
@@ -218,13 +213,13 @@ public class CoordinateTest {
 	
 	@Test
 	public void testAsCartesianCoordinate() {
-		CartesianCoordinate cc1 = new CartesianCoordinate(0.,0.,0.);
-		CartesianCoordinate cc2 = new CartesianCoordinate(1.,0.,0.);
-		CartesianCoordinate cc3 = new CartesianCoordinate(0.,1.,0.);
+		CartesianCoordinate cc1 = CartesianCoordinate.createCartesianCoordinate(0.,0.,0.);
+		CartesianCoordinate cc2 = CartesianCoordinate.createCartesianCoordinate(1.,0.,0.);
+		CartesianCoordinate cc3 = CartesianCoordinate.createCartesianCoordinate(0.,1.,0.);
 		
-		SphericCoordinate sc1 = new SphericCoordinate(0.,0.,0.);
-		SphericCoordinate sc2 = new SphericCoordinate(Math.PI/2., 0., 1.);
-		SphericCoordinate sc3 = new SphericCoordinate(Math.PI/2., Math.PI/2., 1.);
+		SphericCoordinate sc1 = SphericCoordinate.createSphericCoordinate(0.,0.,0.);
+		SphericCoordinate sc2 = SphericCoordinate.createSphericCoordinate(Math.PI/2., 0., 1.);
+		SphericCoordinate sc3 = SphericCoordinate.createSphericCoordinate(Math.PI/2., Math.PI/2., 1.);
 		
 		assertTrue(sc1.asCartesianCoordinate().isEqual(cc1));
 		assertTrue(sc2.asCartesianCoordinate().isEqual(cc2));

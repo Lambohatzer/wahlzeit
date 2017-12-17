@@ -19,6 +19,8 @@
  */
 package org.wahlzeit.model;
 
+import java.util.ArrayList;
+
 /**
  * A SphericCoordinate is a set of three double Values (latitude, longitude, radius), 
  * that describe a point in a 3D Spheric coordinate system.
@@ -26,11 +28,24 @@ package org.wahlzeit.model;
 public class SphericCoordinate extends AbstractCoordinate {
 
 	private double latitude, longitude, radius;
+
+	protected static ArrayList<Coordinate> sphericCoordinates = new ArrayList<>();
+	
+	public static SphericCoordinate createSphericCoordinate(double latitude, double longitude, double radius) {
+		SphericCoordinate coordinate = new SphericCoordinate(latitude, longitude, radius);
+		
+		if(sphericCoordinates.contains(coordinate)) {
+			return (SphericCoordinate) sphericCoordinates.get(sphericCoordinates.indexOf(coordinate));
+		} else {
+			sphericCoordinates.add(coordinate);
+			return coordinate;
+		}
+	}
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public SphericCoordinate(double latitude, double longitude, double radius) {	
+	private SphericCoordinate(double latitude, double longitude, double radius) {	
 		assertValidLatitude(latitude);
 		assertValidLongitude(longitude);
 		assertValidRadius(radius);
@@ -41,24 +56,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		
 		assertClassInvariants();
 	}
-	
-	/**
-	 * @methodtype cloning
-	 */
-	public SphericCoordinate(SphericCoordinate toClone) {
-		assertArgumentIsNotNull(toClone);
 		
-		assertValidLatitude(toClone.latitude);
-		assertValidLongitude(toClone.longitude);
-		assertValidRadius(toClone.radius);
-		
-		this.latitude = toClone.latitude;
-		this.longitude = toClone.longitude;	
-		this.radius = toClone.radius;
-		
-		assertClassInvariants();
-	}
-	
 	/**
 	 * @methodtype getter
 	 */
@@ -85,39 +83,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 		
 		return radius;
 	}
-
-	/**
-	 * @methodtype setter
-	 */
-	public void setLatitude(double latitude) {
-		assertClassInvariants();
-
-		assertValidLatitude(latitude);
-		
-		this.latitude = latitude;
-	}
-
-	/**
-	 * @methodtype setter
-	 */
-	public void setLongitude(double longitude) {
-		assertClassInvariants();
-		
-		assertValidLongitude(longitude);
-		
-		this.longitude = longitude;
-	}
-
-	/**
-	 * @methodtype setter
-	 */
-	public void setRadius(double radius) {
-		assertClassInvariants();
-		
-		assertValidRadius(radius);
-		
-		this.radius = radius;
-	}
 		
 	/**
 	 * @methodtype conversion
@@ -130,7 +95,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double z = radius*Math.cos(latitude);
 
 		assertClassInvariants();
-		return new CartesianCoordinate(x,y,z);
+		return CartesianCoordinate.createCartesianCoordinate(x,y,z);
 	}
 
 	/**
@@ -149,7 +114,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 */
 	public SphericCoordinate asSpericCoordinate() {
 		assertClassInvariants();
-		return new SphericCoordinate(this);
+		return this;
 	}
 	
 	/**
@@ -188,7 +153,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 			assertValidLatitude(this.latitude);
 			assertValidRadius(this.radius);
 		} catch(IllegalArgumentException e) {
-			throw new IllegalStateException();
+			throw new IllegalStateException("Illegal State in SphericCoordinate: " + e.getMessage());
 		}
 	}
 

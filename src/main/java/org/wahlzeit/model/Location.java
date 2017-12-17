@@ -31,7 +31,7 @@ public class Location {
 	 */
 	public Location(Coordinate coordinate) {
 		if(coordinate == null) {
-			this.coordinate = Coordinate.NULL_COORDINATE;
+			this.coordinate = Coordinate.DEFAULT_COORDINATE;
 		} else {
 			this.coordinate = coordinate;
 		}

@@ -19,8 +19,11 @@
  */
 package org.wahlzeit.model;
 
+import java.util.ArrayList;
+
 public abstract class AbstractCoordinate implements Coordinate {
 
+	
 	@Override
 	public boolean equals(Object o) {
 		assertClassInvariants();

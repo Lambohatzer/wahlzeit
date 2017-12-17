@@ -22,7 +22,7 @@ package org.wahlzeit.model;
 public interface Coordinate {
 	
 	double EPSILON = 0.000001;
-	Coordinate NULL_COORDINATE = new NullCoordinate();
+	Coordinate DEFAULT_COORDINATE = CartesianCoordinate.createCartesianCoordinate(1.0,1.0,1.0);
 	
 	/**
 	 * @methodtype conversion
@@ -53,5 +53,5 @@ public interface Coordinate {
 	 * @methodtype boolean-query
 	 */
 	public boolean isEqual(Coordinate c);
-	
+		
 }
