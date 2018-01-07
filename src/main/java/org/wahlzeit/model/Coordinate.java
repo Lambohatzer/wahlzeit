@@ -19,6 +19,13 @@
  */
 package org.wahlzeit.model;
 
+@PatternInstance(
+		patternName = "Interface",
+		participants = {
+				"Interface",
+				"Implementing Class"
+		}
+)
 public interface Coordinate {
 	
 	double EPSILON = 0.000001;

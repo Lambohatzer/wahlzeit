@@ -2,6 +2,7 @@ package org.wahlzeit.services;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.wahlzeit.model.PatternInstance;
 import org.wahlzeit.services.mailing.ServicesMailingTestSuite;
 
 @RunWith(Suite.class)
@@ -10,4 +11,12 @@ import org.wahlzeit.services.mailing.ServicesMailingTestSuite;
 	EmailAddressTest.class,
 	LogBuilderTest.class
 })
+@PatternInstance(
+		patternName = "TestSuite",
+		participants = {
+				"TestSuite Class",
+				"TestClasses to be started",
+				"TestSuites to be started"
+		}
+)
 public class ServicesTestSuite {}

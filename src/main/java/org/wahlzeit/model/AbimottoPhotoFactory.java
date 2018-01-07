@@ -27,6 +27,13 @@ import org.wahlzeit.services.OfyService;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
 
+@PatternInstance(
+		patternName = "Abstract Factory",
+		participants = {
+				"AbstractFactory",
+				"ConcreteFactory"
+		}
+)
 public class AbimottoPhotoFactory extends PhotoFactory {
 
 	private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());

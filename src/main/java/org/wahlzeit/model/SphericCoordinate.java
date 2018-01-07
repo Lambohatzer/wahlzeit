@@ -25,6 +25,13 @@ import java.util.ArrayList;
  * A SphericCoordinate is a set of three double Values (latitude, longitude, radius), 
  * that describe a point in a 3D Spheric coordinate system.
  */
+@PatternInstance(
+		patternName = "Value Object",
+		participants = {
+				"Abstract Superclass",
+				"Value Object"
+		}
+)
 public class SphericCoordinate extends AbstractCoordinate {
 
 	private double latitude, longitude, radius;

@@ -19,8 +19,14 @@
  */
 package org.wahlzeit.model;
 
-import java.util.ArrayList;
 
+@PatternInstance(
+		patternName = "Abstract Superclass",
+		participants = {
+				"AbstractClass",
+				"ConcreteClass"
+		}
+)
 public abstract class AbstractCoordinate implements Coordinate {
 
 	

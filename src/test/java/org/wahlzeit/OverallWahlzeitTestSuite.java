@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.wahlzeit.handlers.HandlersTestSuite;
 import org.wahlzeit.model.ModelTestSuite;
+import org.wahlzeit.model.PatternInstance;
 import org.wahlzeit.services.ServicesTestSuite;
 import org.wahlzeit.utils.UtilsTestSuite;
 
@@ -14,4 +15,12 @@ import org.wahlzeit.utils.UtilsTestSuite;
 	ServicesTestSuite.class,
 	UtilsTestSuite.class
 })
+@PatternInstance(
+		patternName = "TestSuite",
+		participants = {
+				"TestSuite Class",
+				"TestClasses to be started",
+				"TestSuites to be started"
+		}
+)
 public class OverallWahlzeitTestSuite {}

@@ -25,6 +25,13 @@ import java.util.ArrayList;
  * A CartesianCoordinate is a set of three double Values (x, y, z), 
  * that describe a point in a 3D Cartesian coordinate system.
  */
+@PatternInstance(
+		patternName = "Value Object",
+		participants = {
+				"Abstract Superclass",
+				"Value Object"
+		}
+)
 public class CartesianCoordinate extends AbstractCoordinate {
 		
 	private double x, y, z;
