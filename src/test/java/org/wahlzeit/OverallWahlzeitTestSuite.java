@@ -15,12 +15,4 @@ import org.wahlzeit.utils.UtilsTestSuite;
 	ServicesTestSuite.class,
 	UtilsTestSuite.class
 })
-@PatternInstance(
-		patternName = "TestSuite",
-		participants = {
-				"TestSuite Class",
-				"TestClasses to be started",
-				"TestSuites to be started"
-		}
-)
 public class OverallWahlzeitTestSuite {}

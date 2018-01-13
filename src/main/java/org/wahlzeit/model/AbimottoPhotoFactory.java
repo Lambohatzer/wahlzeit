@@ -38,6 +38,10 @@ public class AbimottoPhotoFactory extends PhotoFactory {
 
 	private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());
 	
+	@PatternInstance(
+			patternName = "Singleton",
+			participants = {"Singleton instance"}
+	)
 	private static AbimottoPhotoFactory instance;
 	
 	/**

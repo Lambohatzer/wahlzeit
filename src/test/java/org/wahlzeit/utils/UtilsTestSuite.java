@@ -9,12 +9,4 @@ import org.wahlzeit.model.PatternInstance;
 	StringUtilTest.class,
 	VersionTest.class
 })
-@PatternInstance(
-		patternName = "TestSuite",
-		participants = {
-				"TestSuite Class",
-				"TestClasses to be started",
-				"TestSuites to be started"
-		}
-)
 public class UtilsTestSuite {}

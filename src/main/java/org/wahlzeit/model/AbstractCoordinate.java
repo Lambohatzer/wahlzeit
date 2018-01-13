@@ -19,16 +19,7 @@
  */
 package org.wahlzeit.model;
 
-
-@PatternInstance(
-		patternName = "Abstract Superclass",
-		participants = {
-				"AbstractClass",
-				"ConcreteClass"
-		}
-)
 public abstract class AbstractCoordinate implements Coordinate {
-
 	
 	@Override
 	public boolean equals(Object o) {
@@ -50,6 +41,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * Checks if all three Coordinate-Values of this and other are the same.
 	 * Returns true if they are the same, false otherwise.
 	 */
+	@PatternInstance(
+			patternName = "Template Method",
+			participants = {"Abstract Superclass", "Implementing Subclass"}
+	)
 	public boolean isEqual(Coordinate c) {
 		assertClassInvariants();
 		

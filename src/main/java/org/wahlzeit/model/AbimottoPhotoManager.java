@@ -23,13 +23,6 @@ import java.util.logging.Logger;
 
 import org.wahlzeit.services.LogBuilder;
 
-@PatternInstance(
-		patternName = "Inheritance",
-		participants = {
-				"Superclass",
-				"Extending class"
-		}
-)
 public class AbimottoPhotoManager extends PhotoManager {
 
 	protected static AbimottoPhotoManager instance;

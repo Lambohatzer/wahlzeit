@@ -34,11 +34,15 @@ import java.util.ArrayList;
 )
 public class SphericCoordinate extends AbstractCoordinate {
 
-	private double latitude, longitude, radius;
+	private final double latitude, longitude, radius;
 
 	protected static ArrayList<Coordinate> sphericCoordinates = new ArrayList<>();
 	
-	public static SphericCoordinate createSphericCoordinate(double latitude, double longitude, double radius) {
+	@PatternInstance(
+			patternName = "Factory Method",
+			participants = {"ConcreteProduct","ConcreteFactory"}
+	)
+	public static synchronized SphericCoordinate createSphericCoordinate(double latitude, double longitude, double radius) {
 		SphericCoordinate coordinate = new SphericCoordinate(latitude, longitude, radius);
 		
 		if(sphericCoordinates.contains(coordinate)) {
@@ -189,6 +193,15 @@ public class SphericCoordinate extends AbstractCoordinate {
 		if(radius < 0.0) {
 			throw new IllegalArgumentException("radius must be greater than 0!");
 		}
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 2 >> 17;
+		result += 31 * latitude;
+		result += 31 * longitude;
+		result += 31 * radius;
+		return result;
 	}
 	
 }

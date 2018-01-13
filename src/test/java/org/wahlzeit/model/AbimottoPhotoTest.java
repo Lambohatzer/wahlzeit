@@ -23,13 +23,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-@PatternInstance(
-		patternName = "Test",
-		participants = {
-				"Testing Class",
-				"Component to be Tested"
-		}
-)
 public class AbimottoPhotoTest {
 
 	@Test

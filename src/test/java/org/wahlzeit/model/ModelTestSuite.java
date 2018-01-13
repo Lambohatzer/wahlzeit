@@ -21,12 +21,4 @@ import org.wahlzeit.model.persistence.ModelPersistenceTestSuite;
 	UserStatusTest.class,
 	ValueTest.class
 })
-@PatternInstance(
-		patternName = "TestSuite",
-		participants = {
-				"TestSuite Class",
-				"TestClasses to be started",
-				"TestSuites to be started"
-		}
-)
 public class ModelTestSuite {}

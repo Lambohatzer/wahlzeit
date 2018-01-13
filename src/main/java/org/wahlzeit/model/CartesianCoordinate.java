@@ -34,11 +34,15 @@ import java.util.ArrayList;
 )
 public class CartesianCoordinate extends AbstractCoordinate {
 		
-	private double x, y, z;
+	private final double x, y, z;
 
 	protected static ArrayList<Coordinate> cartesianCoordinates = new ArrayList<>();
 	
-	public static CartesianCoordinate createCartesianCoordinate(double x, double y, double z) {
+	@PatternInstance(
+			patternName = "Factory Method",
+			participants = {"ConcreteProduct","ConcreteFactory"}
+	)
+	public static synchronized CartesianCoordinate createCartesianCoordinate(double x, double y, double z) {
 		CartesianCoordinate coordinate = new CartesianCoordinate(x,y,z);
 		
 		if(cartesianCoordinates.contains(coordinate)) {
@@ -145,7 +149,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	
 	/**
 	 * @methodtype getter
-	 */
+	 */@PatternInstance(
+				patternName = "Chain of Responsibility",
+				participants = {"Calling Object", "Calculating Object"}
+		)
 	public double getSphericDistance(Coordinate c) {
 		assertClassInvariants();
 		
@@ -169,4 +176,13 @@ public class CartesianCoordinate extends AbstractCoordinate {
 			throw new IllegalStateException("Illegal State in CartesianCoordinate: " + e.getMessage());
 		}
 	}	
+	
+	@Override
+	public int hashCode() {
+		int result = 2 >> 16;
+		result += 31 * x;
+		result += 31 * y;
+		result += 31 * z;
+		return result;
+	}
 }

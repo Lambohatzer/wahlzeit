@@ -11,12 +11,4 @@ import org.wahlzeit.services.mailing.ServicesMailingTestSuite;
 	EmailAddressTest.class,
 	LogBuilderTest.class
 })
-@PatternInstance(
-		patternName = "TestSuite",
-		participants = {
-				"TestSuite Class",
-				"TestClasses to be started",
-				"TestSuites to be started"
-		}
-)
 public class ServicesTestSuite {}

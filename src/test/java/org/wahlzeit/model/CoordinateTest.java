@@ -25,13 +25,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-@PatternInstance(
-		patternName = "Test",
-		participants = {
-				"Testing Class",
-				"Component to be Tested"
-		}
-)
 public class CoordinateTest {
 	
 	// ------------------------------------------------------------------------

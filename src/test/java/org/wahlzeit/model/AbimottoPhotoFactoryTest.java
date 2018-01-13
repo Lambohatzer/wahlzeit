@@ -31,13 +31,6 @@ import org.wahlzeit.testEnvironmentProvider.SysConfigProvider;
 import org.wahlzeit.testEnvironmentProvider.UserServiceProvider;
 import org.wahlzeit.testEnvironmentProvider.UserSessionProvider;
 
-@PatternInstance(
-		patternName = "Test",
-		participants = {
-				"Testing Class",
-				"Component to be Tested"
-		}
-)
 public class AbimottoPhotoFactoryTest {
 	
 	@ClassRule

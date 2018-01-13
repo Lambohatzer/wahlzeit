@@ -8,12 +8,4 @@ import org.wahlzeit.model.PatternInstance;
 @Suite.SuiteClasses({
 	TellFriendTest.class
 })
-@PatternInstance(
-		patternName = "TestSuite",
-		participants = {
-				"TestSuite Class",
-				"TestClasses to be started",
-				"TestSuites to be started"
-		}
-)
 public class HandlersTestSuite {}
