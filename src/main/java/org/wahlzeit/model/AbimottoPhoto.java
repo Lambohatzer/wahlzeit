@@ -24,50 +24,51 @@ import com.googlecode.objectify.annotation.Subclass;
 @Subclass
 public class AbimottoPhoto extends Photo {
 
-	private AbimottoTheme theme;
+	private AbimottoTheme abimotto;
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public AbimottoPhoto(PhotoId id, AbimottoTheme theme) {
+	public AbimottoPhoto(PhotoId id, AbimottoTheme abimotto) {
 		super(id);
-		this.theme = theme;
+		this.abimotto = abimotto;
 	}
 	
 	/**
 	 * @methodtype constructor
 	 */
 	public AbimottoPhoto(PhotoId id) {
-		this(id, AbimottoTheme.DEFAULT_THEME);
+		this(id, null);
 	}
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public AbimottoPhoto(AbimottoTheme theme) {
+	public AbimottoPhoto(AbimottoTheme abimotto) {
 		super();
-		this.theme = theme;
+		this.abimotto = abimotto;
 	}
 
 	/**
 	 * @methodtype constructor
 	 */
 	public AbimottoPhoto() {
-		this(AbimottoTheme.DEFAULT_THEME);
+		super();
+		abimotto = null;
 	}
 	
 	/**
 	 * @methodtype setter
 	 */
-	public void setAbimottoTheme(AbimottoTheme theme) {
-		this.theme = theme;
+	public void setAbimottoTheme(AbimottoTheme abimotto) {
+		this.abimotto = abimotto;
 	}
 	
 	/**
 	 * @methodtype getter
 	 */
 	public AbimottoTheme getAbimottoTheme() {
-		return theme;
+		return abimotto;
 	}
 	
 }

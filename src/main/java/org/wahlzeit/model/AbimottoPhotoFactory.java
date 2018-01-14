@@ -116,8 +116,8 @@ public class AbimottoPhotoFactory extends PhotoFactory {
 	 * @methodtype factory
 	 * @return a new AbimottoPhoto.
 	 */
-	public AbimottoPhoto createAbimottoPhoto(AbimottoTheme theme) {
-		return new AbimottoPhoto(theme);
+	public AbimottoPhoto createAbimottoPhoto(AbimottoTheme abimotto) {
+		return new AbimottoPhoto(abimotto);
 	}
 	
 	/**
@@ -132,8 +132,8 @@ public class AbimottoPhotoFactory extends PhotoFactory {
 	 * @methodtype factory
 	 * @return a new AbimottoPhoto.
 	 */
-	public AbimottoPhoto createAbimottoPhoto(PhotoId id, AbimottoTheme theme) {
-		return new AbimottoPhoto(id, theme);
+	public AbimottoPhoto createAbimottoPhoto(PhotoId id, AbimottoTheme abimotto) {
+		return new AbimottoPhoto(id, abimotto);
 	}
 		
 
