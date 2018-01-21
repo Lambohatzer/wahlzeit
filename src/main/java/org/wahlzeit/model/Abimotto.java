@@ -44,8 +44,8 @@ public class Abimotto {
 	@Override
 	public int hashCode() {
 		int result = 0;
-		result = 31 * result + id;
-		result = 31 * result + type.hashCode();
+		result += 31 * result + id;
+		result += 31 * result + type.hashCode();
 		return result;
 	}
 	

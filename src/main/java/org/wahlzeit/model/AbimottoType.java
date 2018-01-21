@@ -15,6 +15,10 @@ public class AbimottoType {
 	private String catchphrase;
 
 	public AbimottoType() {
+		year = 2015;
+		topic = "Prime Time";
+		isParody = true;
+		catchphrase = "Abi Primetime 20:15";
 	}
 
 	public Abimotto createInstance() {
@@ -23,10 +27,6 @@ public class AbimottoType {
 
 	public AbimottoType getSuperType() {
 		return superType;
-	}
-
-	public Iterator<AbimottoType> getSubTypesIterator() {
-		return subTypes.iterator();
 	}
 
 	public void addSubType(AbimottoType subType) {
@@ -50,6 +50,28 @@ public class AbimottoType {
 
 	public boolean isSubtype() {
 		return superType != null;
+	}
+	
+	public boolean isSubtypeOf(AbimottoType other) {
+		if(this.superType == other) return true;
+		if(this.superType == null) return false;
+		return this.superType.isSubtypeOf(other);
+	}
+	
+	public boolean isSupertype() {
+		return subTypes.size() != 0;
+	}
+	
+	public boolean isSupertypeOf(AbimottoType other) {
+		return other.isSubtypeOf(this);
+	}
+	
+	public boolean hasSubtype(AbimottoType other) {
+		for(AbimottoType at: subTypes) {
+			if(other == at) return true;
+			if(at.hasSubtype(other)) return true;
+		}
+		return false;
 	}
 
 	public boolean isEqual(AbimottoType other) {

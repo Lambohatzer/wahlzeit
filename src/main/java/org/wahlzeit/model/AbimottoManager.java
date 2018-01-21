@@ -17,7 +17,7 @@ public class AbimottoManager extends ObjectManager {
 	
 	private AbimottoManager() {}
 	
-	public synchronized AbimottoManager getInstance() {
+	public static synchronized AbimottoManager getInstance() {
 		if(instance == null) {
 			instance = new AbimottoManager();
 		}

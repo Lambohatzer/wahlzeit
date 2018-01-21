@@ -19,17 +19,19 @@
  */
 package org.wahlzeit.model;
 
+import com.googlecode.objectify.annotation.Serialize;
 import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
 public class AbimottoPhoto extends Photo {
 
-	private AbimottoTheme abimotto;
+	@Serialize
+	private Abimotto abimotto;
 	
 	/**
 	 * @methodtype constructor
 	 */
-	public AbimottoPhoto(PhotoId id, AbimottoTheme abimotto) {
+	public AbimottoPhoto(PhotoId id, Abimotto abimotto) {
 		super(id);
 		this.abimotto = abimotto;
 	}
@@ -44,7 +46,7 @@ public class AbimottoPhoto extends Photo {
 	/**
 	 * @methodtype constructor
 	 */
-	public AbimottoPhoto(AbimottoTheme abimotto) {
+	public AbimottoPhoto(Abimotto abimotto) {
 		super();
 		this.abimotto = abimotto;
 	}
@@ -60,14 +62,14 @@ public class AbimottoPhoto extends Photo {
 	/**
 	 * @methodtype setter
 	 */
-	public void setAbimottoTheme(AbimottoTheme abimotto) {
+	public void setAbimottoTheme(Abimotto abimotto) {
 		this.abimotto = abimotto;
 	}
 	
 	/**
 	 * @methodtype getter
 	 */
-	public AbimottoTheme getAbimottoTheme() {
+	public Abimotto getAbimottoTheme() {
 		return abimotto;
 	}
 	
