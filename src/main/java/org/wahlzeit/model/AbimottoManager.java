@@ -26,7 +26,7 @@ public class AbimottoManager extends ObjectManager {
 	
 	public Abimotto createAbimotto(String abimottoName) {
 		assertIsValidAbimottoName(abimottoName);
-		AbimottoType type = new AbimottoType();
+		AbimottoType type = getAbimottoType(abimottoName);
 		Abimotto abimotto = type.createInstance();
 		abimottos.put(abimotto.getId(), abimotto);
 		return abimotto;

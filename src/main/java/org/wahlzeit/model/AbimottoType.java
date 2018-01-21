@@ -53,8 +53,8 @@ public class AbimottoType {
 	}
 	
 	public boolean isSubtypeOf(AbimottoType other) {
-		if(this.superType == other) return true;
 		if(this.superType == null) return false;
+		if(this.superType.isEqual(other)) return true;
 		return this.superType.isSubtypeOf(other);
 	}
 	
@@ -68,7 +68,7 @@ public class AbimottoType {
 	
 	public boolean hasSubtype(AbimottoType other) {
 		for(AbimottoType at: subTypes) {
-			if(other == at) return true;
+			if(other.isEqual(at)) return true;
 			if(at.hasSubtype(other)) return true;
 		}
 		return false;
